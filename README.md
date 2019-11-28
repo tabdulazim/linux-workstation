@@ -2,7 +2,7 @@
 Ansible playbooks to prepare a fresh linux workstation
 
 ## Basic setup
-- [ ] core packages: vim, pwgen, pip, git 
+- [x] core packages: vim, pwgen, pip, git 
 - [ ] pip packages: awscli
 
 ## System Configuration
@@ -10,8 +10,9 @@ Ansible playbooks to prepare a fresh linux workstation
 - [ ] theme
 
 ## Development Environment
-- [ ] Visual Studio Code
+- [x] Visual Studio Code
 - [ ] Docker
 - [ ] Kubectl
 - [ ] Github ssh
+- [x] Golang
 
