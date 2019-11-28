@@ -1,0 +1,13 @@
+---
+- name: Debian - Workstation
+  hosts: localhost
+  roles:
+          #- base
+    - code
+
+  pre_tasks:
+    - name: Refresh package cache and upgrade system
+      apt:
+        cache_valid_time: 3600
+        update_cache: yes
+        upgrade: yes
