@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook workstation.yaml --become
+ANSIBLE_LIBRARY=library ansible-playbook workstation.yml --become 
