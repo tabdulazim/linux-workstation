@@ -14,3 +14,11 @@
 - name: Configure mouse natural-scroll
   gsettings: schema=org.gnome.desktop.peripherals.mouse key=natural-scroll value=true
   become: no
+
+- name: Add Microsoft Bluetooth Mouse to pin-code-database.xml
+  lineinfile: 
+    dest: /usr/share/gnome-bluetooth/pin-code-database.xml
+    regexp: '^\s*<device oui="${bluetooth_mouse}'
+    line: '	<device oui="C0:33:5E:" type="mouse" name="Microsoft Sculpt Comfort Mouse" pin="0000"/>'
+    insertbefore: '\s*</devices>'
+  when: bluetooth_mouse is defined
