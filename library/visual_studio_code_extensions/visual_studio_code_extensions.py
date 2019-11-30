@@ -64,11 +64,29 @@ def install_extension(module, executable, name):
         return changed, 'install'
 
 
-def main():
+def uninstall_extension(module, executable, name):
+    if is_extension_installed(module, executable, name):
+        rc, out, err = module.run_command(
+            [executable, '--uninstall-extension', name])
+        if rc != 0 or err:
+            module.fail_json(
+                msg='Error while uninstalling extension [%s]: %s' % (name,
+                                                                     out + err))
+        if 'successfully uninstalled' not in out:
+            module.fail_json(
+                msg=('Error while uninstalling extension [%s]:'
+                     ' unexpected response: %s') % (name, out + err))
+        return True
+    else:
+        return False
+
+
+def run_module():
 
     module_args = dict(
         executable=dict(type='str', required=False, choices=['code', 'code-insiders'], default='code'),
-        name=dict(type='str', required=True))
+        name=dict(type='str', required=True),
+        state=dict(type='str', default='present', choices=['absent', 'present']))
 
     module = AnsibleModule(argument_spec=module_args,
                            supports_check_mode=False)
@@ -78,18 +96,31 @@ def main():
         executable = 'code'
 
     name = module.params['name']
+    state = module.params['state']
 
-    changed, change = install_extension(module, executable, name)
+    if state == 'absent':
+        changed = uninstall_extension(module, executable, name)
 
-    if changed:
-        if change == 'upgrade':
-            msg = '%s was upgraded' % name
+        if changed:
+            msg = '%s is now uninstalled' % name
         else:
-            msg = '%s is now installed' % name
+            msg = '%s is not installed' % name
     else:
-        msg = '%s is already installed' % name
+        changed, change = install_extension(module, executable, name)
+
+        if changed:
+            if change == 'upgrade':
+                msg = '%s was upgraded' % name
+            else:
+                msg = '%s is now installed' % name
+        else:
+            msg = '%s is already installed' % name
 
     module.exit_json(changed=changed, msg=msg)
+
+
+def main():
+    run_module()
 
 
 if __name__ == '__main__':

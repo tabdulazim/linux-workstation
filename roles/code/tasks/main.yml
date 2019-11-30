@@ -1,16 +1,21 @@
 ---
 # tasks file for roles/code
-- name: install dependencies (apt)
-  become: yes
-  apt:
-    name:
-      - ca-certificates
-      - apt-transport-https
-      - gconf2
-      - libasound2
-      - libgtk2.0-0
-      - libxss1
+- name: assert supported build
+  assert:
+    that:
+      - "visual_studio_code_extensions_build in ('stable', 'insiders')"
+
+- name: include package manager specific vars
+  with_first_found:
+    - '../vars/pkg-mgr/{{ ansible_pkg_mgr }}.yml'
+    - ../vars/pkg-mgr/default.yml
+  include_vars: '{{ item }}'
+
+- name: install extension cli dependencies
+  package:
+    name: '{{ item }}'
     state: present
+  with_items: '{{ visual_studio_code_extensions_dependencies }}'
 
 - name: install key (apt)
   become: yes
@@ -27,8 +32,8 @@
 
 - name: install VS Code (apt)
   become: yes
-  apt:
-    name: "{{ visual_studio_code_package }}{{ (visual_studio_code_version | length > 0) | ternary('=' + visual_studio_code_version, '') }}"
+  package:
+    name: code
     state: present
 
 - name: Install extensions
@@ -36,3 +41,5 @@
   visual_studio_code_extensions:
     name: "{{ item }}"
   loop: "{{ visual_studio_code_extensions }}"
+  loop_control:
+    label: "{{ item }}"
