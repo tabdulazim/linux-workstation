@@ -11,3 +11,4 @@ packages:
   - wget
   - nmap
   - dnsutils
+  - nextcloud-desktop

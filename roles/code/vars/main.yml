@@ -12,3 +12,8 @@ visual_studio_code_package: "{{ (visual_studio_code_build == 'insiders') | terna
 
 # The CLI executable
 visual_studio_code_exe: "{{ (visual_studio_code_build == 'insiders') | ternary('code-insiders', 'code') }}"
+
+visual_studio_code_extensions:
+  - ms-python.python
+  - ms-vscode.go
+

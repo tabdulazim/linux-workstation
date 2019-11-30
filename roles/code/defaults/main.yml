@@ -8,8 +8,16 @@ visual_studio_code_version: ''
 # Ubuntu only (code-insiders isn't in Microsoft's RPM repo)
 visual_studio_code_build: stable
 
+visual_studio_code_extensions_build: stable
+
+visual_studio_code_extensions_exe: code
+
 # Directory to store files downloaded for Visual Studio Code installation
 visual_studio_code_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
 
 # Users to install extensions for and/or write settings.json
 users: []
+
+visual_studio_code_extensions:
+  - ms-python.python
+  - ms-vscode.go

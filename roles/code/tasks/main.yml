@@ -30,3 +30,9 @@
   apt:
     name: "{{ visual_studio_code_package }}{{ (visual_studio_code_version | length > 0) | ternary('=' + visual_studio_code_version, '') }}"
     state: present
+
+- name: Install extensions
+  become: no
+  visual_studio_code_extensions:
+    name: "{{ item }}"
+  loop: "{{ visual_studio_code_extensions }}"
