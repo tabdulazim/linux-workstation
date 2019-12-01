@@ -1,0 +1,19 @@
+---
+# defaults file for roles/docker
+
+docker_compose_version: 1.25.0
+
+docker_dependencies:
+  - git
+  - apt-transport-https
+  - ca-certificates
+  - wget
+  - software-properties-common
+  - gnupg2
+  - curl
+  - python-backports.ssl-match-hostname
+
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io

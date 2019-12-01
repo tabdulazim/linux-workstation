@@ -1,8 +1,11 @@
 ---
 - name: Debug
   hosts: localhost
+  become: yes
   tasks:
-    - name: Configure touchpad natural-scroll
-      gsettings: schema=org.gnome.desktop.peripherals.touchpad key=natural-scroll value=true
-    - name: Configure mouse natural-scroll
-      gsettings: schema=org.gnome.desktop.peripherals.mouse key=natural-scroll value=true
+    - name: get the username running the deploy
+      become: false
+      local_action: command whoami
+      register: username_on_the_host
+
+    - debug: var=username_on_the_host

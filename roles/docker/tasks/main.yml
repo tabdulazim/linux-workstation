@@ -1,0 +1,37 @@
+---
+- name: Install packages for apt add repository over HTTPS
+  package:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ docker_dependencies }}"
+
+- name: Add Apt signing key from official docker repo
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: add docker official repository for Debian
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_lsb.codename }} stable"
+    state: present
+
+- name: Install docker
+  package:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  loop: "{{ docker_packages }}"
+
+- name: Add current user to docker group
+  become: no
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes
+
+- name: Install docker-compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_machine }}"
+    dest: /usr/local/bin/docker-compose
+    mode: "u+rwx,g+rx,o+x"
+    checksum: sha256:2bdab0bbf42583b4b77ee015cf908933c78f0572a7cb949a7dd8e200e6250221

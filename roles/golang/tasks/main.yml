@@ -99,3 +99,9 @@
   setup:
     filter: ansible_local
 
+- name: Install extra packages
+  package:
+    name: '{{ item }}'
+  loop: '{{ golang_extra_packages }}'
+  when: golang_extra_packages is defined
+

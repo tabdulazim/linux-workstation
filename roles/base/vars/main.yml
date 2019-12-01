@@ -12,3 +12,4 @@ packages:
   - nmap
   - dnsutils
   - nextcloud-desktop
+  - python3-pip
