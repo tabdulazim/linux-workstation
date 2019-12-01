@@ -14,7 +14,7 @@ golang_install_dir: '/opt/go/{{ golang_version }}'
 golang_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
 
 # Location for GOPATH environment variable
-golang_gopath: ~/go
+golang_gopath: "$HOME/go" 
 
 golang_extra_packages:
   - protobuf-compiler

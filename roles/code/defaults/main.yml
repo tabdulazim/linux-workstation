@@ -20,3 +20,4 @@ visual_studio_code_extensions:
   - ms-vsliveshare.vsliveshare-pack
   - ms-vscode-remote.remote-ssh
   - ms-kubernetes-tools.vscode-kubernetes-tools
+  - yzhang.markdown-all-in-one
