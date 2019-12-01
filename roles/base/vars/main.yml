@@ -13,3 +13,4 @@ packages:
   - dnsutils
   - nextcloud-desktop
   - python3-pip
+  - ncat
