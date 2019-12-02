@@ -1,6 +1,8 @@
 ---
 # vars file for roles/base
 bluetooth_mouse: "C0:33:5E:"
+shell_extensions: "['launch-new-instance@gnome-shell-extensions.gcampax.github.com']"
+
 packages: 
   - vim
   - git
