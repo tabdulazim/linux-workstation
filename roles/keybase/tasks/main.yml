@@ -1,0 +1,22 @@
+---
+- name: "Check if Keybase is installed"
+  package_facts:
+    manager: "auto"
+
+- name: Download Keybase
+  get_url:
+    url: 'https://prerelease.keybase.io/keybase_amd64.deb'
+    dest: '/tmp/keybase_amd64.deb'
+    sha256sum: '{{ keybase_sha256sum }}'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=rx'
+  when: "'keybase' not in ansible_facts.packages"
+
+- name: Install Keybase
+  apt:
+    deb: '/tmp/keybase_amd64.deb'
+  when: "'keybase' not in ansible_facts.packages"
+
+#- name: Run Keybase
