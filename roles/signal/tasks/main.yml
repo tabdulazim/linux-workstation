@@ -1,0 +1,17 @@
+---
+- name: Download signal key
+  apt_key:
+      url: https://updates.signal.org/desktop/apt/keys.asc
+      state: present 
+      validate_certs: yes # not required. If C(no), SSL certificates for the target url will not be validated. This should only be used on personally controlled sites using self-signed certificates.
+
+- name: Add signal repo
+  apt_repository:
+    repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
+    state: present
+    update_cache: yes
+
+- name: Install signal-desktop
+  package:
+    name: signal-desktop
+    state: present 

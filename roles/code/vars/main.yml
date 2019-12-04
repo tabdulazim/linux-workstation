@@ -1,3 +1,21 @@
 ---
 # The CLI executable
 visual_studio_code_extensions_exe: "{{ (visual_studio_code_extensions_build == 'insiders') | ternary('code-insiders', 'code') }}"
+
+visual_studio_code_extensions:
+  - ms-python.python
+  - ms-vscode.go
+  - eamodio.gitlens
+  - redhat.vscode-yaml
+  - redhat.java
+  - james-yu.latex-workshop
+  - yzane.markdown-pdf
+  - rust-lang.rust
+  - esbenp.prettier-vscode
+  - ms-azuretools.vscode-docker
+  - ms-vsliveshare.vsliveshare
+  - ms-vsliveshare.vsliveshare-pack
+  - ms-vscode-remote.remote-ssh
+  - ms-kubernetes-tools.vscode-kubernetes-tools
+  - yzhang.markdown-all-in-one
+  - vscoss.vscode-ansible
