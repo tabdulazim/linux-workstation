@@ -3,7 +3,7 @@ Ansible playbooks to prepare a fresh linux workstation
 
 ## Basic setup
 - [x] core packages: vim, pwgen, pip, git 
-- [ ] pip packages: awscli
+- [x] pip packages: awscli
 
 ## System Configuration
 - [ ] icons
@@ -11,8 +11,10 @@ Ansible playbooks to prepare a fresh linux workstation
 
 ## Development Environment
 - [x] Visual Studio Code
-- [ ] Docker
+- [x] Docker
 - [ ] Kubectl
 - [ ] Github ssh
 - [x] Golang
 
+## Notes
+- Install watchman `./configure --enable-lenient`

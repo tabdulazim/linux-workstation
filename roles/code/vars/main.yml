@@ -19,3 +19,5 @@ visual_studio_code_extensions:
   - ms-kubernetes-tools.vscode-kubernetes-tools
   - yzhang.markdown-all-in-one
   - vscoss.vscode-ansible
+  - naco-siren.gradle-language
+  - dsteenman.cloudformation-yaml-snippets

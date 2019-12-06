@@ -16,3 +16,10 @@ packages:
   - nextcloud-desktop
   - python3-pip
   - ncat
+  - apt-file
+# watchman
+  - automake
+  - pkg-config
+  - libtool
+  - libssl-dev
+# end
