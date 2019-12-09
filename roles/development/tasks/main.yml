@@ -54,4 +54,9 @@
   copy:
     dest: /etc/profile.d/spark.sh
     content: 'PATH=$PATH:/opt/spark/bin'
-    
+
+- name: Install sceptre
+  pip:
+    name: sceptre
+    executable: pip3
+    state: present 
