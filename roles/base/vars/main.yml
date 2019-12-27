@@ -18,6 +18,8 @@ packages:
   - ncat
   - apt-file
   - tree
+  - zbar-tools
+  - cups
 # watchman
   - automake
   - pkg-config

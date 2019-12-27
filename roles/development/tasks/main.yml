@@ -3,60 +3,73 @@
 
 - name: Download gradle
   get_url:
-      dest: /tmp/gradle.zip
-      url:  https://downloads.gradle-dn.com/distributions/gradle-6.0.1-bin.zip
-      sha256sum: d364b7098b9f2e58579a3603dc0a12a1991353ac58ed339316e6762b21efba44
-     
-- name : Unzip gradle
+    dest: /tmp/gradle.zip
+    url: https://downloads.gradle-dn.com/distributions/gradle-6.0.1-bin.zip
+    sha256sum: "{{ gradle_sha256 }}"
+
+- name: Unzip gradle
   become: no
   unarchive:
-      src: /tmp/gradle.zip
-      dest: /opt
-      list_files: yes
+    src: /tmp/gradle.zip
+    dest: /opt
+    list_files: yes
   register: archive_contents
 
-- name: Create gradle symbolic link 
+- name: Create gradle symbolic link
   become: no
   file:
     src: "{{ archive_contents.files[0].split('/')[0] }}"
     dest: "/opt/gradle"
     state: link
 
-- name: Create gradle /bin symbolic link 
+- name: Create gradle /bin symbolic link
   file:
     src: "/opt/gradle/bin/gradle"
     dest: "/usr/local/bin/gradle"
     state: link
-    
 
 - name: Download spark
   get_url:
-      dest: /tmp/spark.zip
-      url:  https://www-us.apache.org/dist/spark/spark-2.4.4/spark-2.4.4-bin-hadoop2.7.tgz
-      sha256sum: 72833745defba95262fbe67306a48c251dbbe17585d65f6095057fc3dc2812ea
-     
-- name : Unzip spark
+    dest: /tmp/spark.zip
+    url: https://www-us.apache.org/dist/spark/spark-2.4.4/spark-2.4.4-bin-hadoop2.7.tgz
+    sha256sum: "{{ spark_sha256 }}"
+
+- name: Unzip spark
   become: no
   unarchive:
-      src: /tmp/spark.zip
-      dest: /opt
-      list_files: yes
+    src: /tmp/spark.zip
+    dest: /opt
+    list_files: yes
   register: archive_contents
 
-- name: Create spark symbolic link 
+- name: Create spark symbolic link
   become: no
   file:
     src: "{{ archive_contents.files[0].split('/')[0] }}"
     dest: "/opt/spark"
     state: link
 
-- name: Add spark /bin/ to path 
+- name: Add spark /bin/ to path
   copy:
     dest: /etc/profile.d/spark.sh
-    content: 'PATH=$PATH:/opt/spark/bin'
+    content: "PATH=$PATH:/opt/spark/bin"
 
 - name: Install sceptre
   pip:
     name: sceptre
     executable: pip3
-    state: present 
+    state: present
+
+- name: Download Rust
+  get_url:
+    dest: /tmp/rustup.sh
+    url: https://static.rust-lang.org/rustup.sh
+    sha256sum: "{{ rust_sha256 }}"
+  become: no
+
+- name: Install Rust
+  shell: /tmp/rustup.sh -y
+  args:
+    executable: /bin/bash 
+    creates: "$HOME/.cargo//bin/rustc"
+  become: no
