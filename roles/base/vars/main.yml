@@ -20,6 +20,8 @@ packages:
   - tree
   - zbar-tools
   - cups
+  - rsync
+  - gimp
 # watchman
   - automake
   - pkg-config

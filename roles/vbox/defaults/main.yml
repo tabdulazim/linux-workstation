@@ -1,0 +1,9 @@
+---
+# defaults file for roles/vbox
+
+vbox_key_url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
+vbox_repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
+vbox_version: "6.1.0"
+vbox_pkg_name: "virtualbox-6.1"
+vbox_dkms_pkg_name: 
+vbox_install_dkms: no

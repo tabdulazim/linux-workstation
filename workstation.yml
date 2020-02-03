@@ -2,8 +2,9 @@
 - name: Debian - Workstation
   hosts: localhost
   roles:
-    - base
+    - base 
     - development
+    - vbox
     - signal
     - keybase
     - docker
