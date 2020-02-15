@@ -1,6 +1,25 @@
 ---
 # tasks file for roles/development
 
+- name: Download hugo
+  get_url:
+    dest: /tmp/hugo.tar.gz
+    url: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_extended_{{ hugo_version }}_Linux-64bit.tar.gz"
+    sha256sum: "{{ hugo_sha256 }}"
+
+- name: Unarchive hugo
+  become: no
+  unarchive:
+    src: /tmp/hugo.tar.gz
+    dest: /tmp
+
+- name: Install hugo binary
+  become: yes
+  copy:
+    src: /tmp/hugo
+    dest: /usr/local/bin/hugo
+    mode: u+x,g+x,o+x
+
 - name: Download gradle
   get_url:
     dest: /tmp/gradle.zip
@@ -31,7 +50,7 @@
 - name: Download spark
   get_url:
     dest: /tmp/spark.zip
-    url: https://www-us.apache.org/dist/spark/spark-2.4.4/spark-2.4.4-bin-hadoop2.7.tgz
+    url: "https://downloads.apache.org/spark/spark-{{ spark_version }}/spark-{{ spark_version }}-bin-hadoop2.7.tgz"
     sha256sum: "{{ spark_sha256 }}"
 
 - name: Unzip spark
