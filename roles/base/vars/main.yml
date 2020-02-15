@@ -24,6 +24,8 @@ packages:
   - gimp
   - smbclient
   - cifs-utils
+  - oathtool # otp
+  - zbar-tools # QR tools
 # watchman
   - automake
   - pkg-config
