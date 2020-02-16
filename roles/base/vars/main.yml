@@ -24,6 +24,7 @@ packages:
   - gimp
   - smbclient
   - cifs-utils
+  - secure-delete
   - oathtool # otp
   - zbar-tools # QR tools
 # watchman
