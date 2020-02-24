@@ -1,6 +1,25 @@
 ---
 # tasks file for roles/development
 
+- name: Download terraform
+  get_url:
+    dest: /tmp/terraform.zip
+    url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+    sha256sum: "{{ terraform_sha256 }}"
+
+- name: Unarchive terraform
+  become: no
+  unarchive:
+    src: /tmp/terraform.zip
+    dest: /tmp
+
+- name: Install terraform binary
+  become: yes
+  copy:
+    src: /tmp/terraform
+    dest: /usr/local/bin/terraform
+    mode: u+x,g+x,o+x
+
 - name: Download hugo
   get_url:
     dest: /tmp/hugo.tar.gz

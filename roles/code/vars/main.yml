@@ -22,3 +22,4 @@ visual_studio_code_extensions:
   - naco-siren.gradle-language
   - dsteenman.cloudformation-yaml-snippets
   - scalameta.metals
+  - mauve.terraform
