@@ -25,6 +25,7 @@ packages:
   - smbclient
   - cifs-utils
   - secure-delete
+  - bash-completion
   - oathtool # otp
   - zbar-tools # QR tools
 # watchman

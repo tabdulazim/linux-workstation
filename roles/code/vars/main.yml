@@ -23,3 +23,4 @@ visual_studio_code_extensions:
   - dsteenman.cloudformation-yaml-snippets
   - scalameta.metals
   - mauve.terraform
+  - vscode-proto3

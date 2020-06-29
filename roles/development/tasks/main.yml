@@ -1,6 +1,18 @@
 ---
 # tasks file for roles/development
 
+
+- name: Install dive
+  apt:
+    deb: https://github.com/wagoodman/dive/releases/download/v0.9.2/dive_0.9.2_linux_amd64.deb
+
+- name: Download sops
+  get_url:
+    dest: /usr/local/bin/sops
+    url: "https://github.com/mozilla/sops/releases/download/v{{sops_version}}/sops-v{{sops_version}}.linux"
+    sha256sum: "{{ sops_sha256 }}"
+    mode: u+x,g+x,o+x
+
 - name: Download terraform
   get_url:
     dest: /tmp/terraform.zip
